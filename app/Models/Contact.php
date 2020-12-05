@@ -19,27 +19,51 @@ class Contact extends Model
     ];
 
     /**
-     * The attributes that can not be filled
-     * for mass assignment.
+     * The attributes that can not be filled for mass assignment.
      * 
      * @var array
      */
     protected $guarded = [];
-
+    
+    /**
+     * Gets all contact numbers for a user.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function contactNumbers()
+    {
+        return $this->hasMany(ContactNumber::class);
+    }
+    
+    /**
+     * Concatenates a contact's first and last names.
+     *
+     * @return string
+     */
     public function getFullNameAttribute()
     {
         return "{$this->first_name} {$this->last_name}";
     }
-
+    
+    /**
+     * Applies a query string to a search for a contact.
+     * Will attempt to search by normalised first name,
+     * last name and company columns, as well as the
+     * email column as-is.
+     *
+     * @param  \Illuminate\Database\Eloquent\Builder $query
+     * @param  string $terms
+     * @return void
+     */
     public function scopeSearch(\Illuminate\Database\Eloquent\Builder $query, $terms)
     {
         if (!empty($terms)) {
             collect(explode(' ', $terms))->each(function ($term) use ($query) {
-                $term = preg_replace('/[^A-Za-z0-9]/', '', $term).'%';
-                $query->where('contacts.first_name_normalised', 'like', $term)
-                    ->orWhere('contacts.last_name_normalised', 'like', $term)
-                    ->orWhere('contacts.email', 'like', $term)
-                    ->orWhere('contacts.company_normalised', 'like', $term);
+                $normalisedTerm = preg_replace('/[^A-Za-z0-9]/', '', $term).'%';
+                $query->where('contacts.first_name_normalised', 'like', $normalisedTerm)
+                    ->orWhere('contacts.last_name_normalised', 'like', $normalisedTerm)
+                    ->orWhere('contacts.company_normalised', 'like', $normalisedTerm)
+                    ->orWhere('email', $term);
             });
         }
     }
