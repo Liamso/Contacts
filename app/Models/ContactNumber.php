@@ -18,6 +18,15 @@ class ContactNumber extends Model
     protected $guarded = [];
 
     /**
+     * The attributes that should be cast.
+     *
+     * @var array
+     */
+    protected $casts = [
+        'is_primary' => 'boolean',
+    ];
+
+    /**
      * Gets the contact for a number.
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasOne
