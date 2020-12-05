@@ -2,8 +2,7 @@
 
 @section('content')
 
-
-<div class="flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
+<div class="flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8 md:w-1/3">
   <div class="max-w-md w-full space-y-8">
     <div>
       <h2 class="mt-6 text-center text-3xl font-extrabold text-gray-900">
@@ -40,12 +39,6 @@
           <label for="remember_me" class="ml-2 block text-sm text-gray-900" >
             Remember me
           </label>
-        </div>
-
-        <div class="text-sm">
-          <a href="{{ route('password.request') }}" class="font-medium text-gray-700 hover:text-gray-400">
-            Forgot your password?
-          </a>
         </div>
       </div>
 
