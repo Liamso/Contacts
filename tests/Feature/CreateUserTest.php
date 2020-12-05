@@ -13,7 +13,7 @@ class CreateUserTest extends TestCase
     use RefreshDatabase;
 
     /**
-     * A basic feature test example.
+     * Tests that a user is created form the make:user command.
      *
      * @return void
      */
@@ -26,6 +26,7 @@ class CreateUserTest extends TestCase
             ->assertExitCode(0);
 
         $user = User::first();
+
         $this->assertEquals('test@test.com', $user->email);
         $this->assertEquals('Admin', $user->name);
         $this->assertEquals(1, User::count());
@@ -35,7 +36,13 @@ class CreateUserTest extends TestCase
             'password' => 'password'
         ]));
     }
-
+    
+    /**
+     * Tests that validation is being run on the three
+     * inputs of the make:user aritsan command.
+     *
+     * @return void
+     */
     public function testValidatesInput()
     {
         $this->artisan('make:user test')
