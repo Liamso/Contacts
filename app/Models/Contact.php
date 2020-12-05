@@ -15,7 +15,7 @@ class Contact extends Model
      * @var array
      */
     protected $casts = [
-        'date_of_birth' => 'datetime:Y-m-d',
+        'date_of_birth' => 'date:Y-m-d',
     ];
 
     /**
@@ -34,7 +34,7 @@ class Contact extends Model
     {
         return $this->hasMany(ContactNumber::class);
     }
-    
+
     /**
      * Concatenates a contact's first and last names.
      *

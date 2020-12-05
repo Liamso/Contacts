@@ -11,6 +11,8 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class ContactTest extends TestCase
 {
+    use RefreshDatabase;
+
     /**
      * A basic feature test example.
      *
@@ -54,17 +56,7 @@ class ContactTest extends TestCase
     {
         $contact = Contact::factory()->withDOB()->withEmail()->create();
 
-        // Check the contact edit page
-        $response = $this->get("/contacts/{$contact->id}/edit");
-        $response->assertStatus(200);
-        $response->assertSee($contact->first_name);
-        $response->assertSee($contact->last_name);
-        $response->assertSee($contact->email);
-        $response->assertSee($contact->date_of_birth->format('Y-m-d'));
-        $response->assertSee($contact->company);
-        $response->assertSee($contact->position);
-
-        // Check the contact update
+        // The data and fields we want to update / check
         $newData = [
             'first_name' => 'New Name',
             'last_name' => 'New Last Name',
@@ -74,16 +66,26 @@ class ContactTest extends TestCase
             'position' => 'New Position'
         ];
 
+        // Check the contact edit page
+        $response = $this->get("/contacts/{$contact->id}/edit");
+        $response->assertStatus(200);
+
+        foreach ($contact->toArray() as $key => $value) {
+            if (in_array($key, $newData)) {
+                $response->assertSee($value);
+            }
+        }
+
         $this->followingRedirects();
         $response = $this->put("/contacts/{$contact->id}", $newData);
 
+        // Did we assign the new datems correctly?
         $response->assertStatus(200);
+        $newContact = $response['contact']->toArray();
         foreach($newData as $key => $value) {
-            if ($key === 'date_of_birth') {
-                $value = new Carbon($value);
+            if (in_array($key, $newData)) {
+                $this->assertEquals($value, $newContact[$key]);
             }
-
-            $this->assertEquals($value, $response['contact']->$key);
         }
     }
 }
