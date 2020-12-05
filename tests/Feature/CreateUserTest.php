@@ -2,9 +2,11 @@
 
 namespace Tests\Feature;
 
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
+use App\Models\User;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Foundation\Testing\WithFaker;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class CreateUserTest extends TestCase
 {
@@ -22,6 +24,16 @@ class CreateUserTest extends TestCase
             ->expectsQuestion('Please set a password for the user', 'password')
             ->expectsOutput("User created! Use the email 'test@test.com' to login with the password you chose.")
             ->assertExitCode(0);
+
+        $user = User::first();
+        $this->assertEquals('test@test.com', $user->email);
+        $this->assertEquals('Admin', $user->name);
+        $this->assertEquals(1, User::count());
+
+        $this->assertTrue(Auth::attempt([
+            'email' => 'test@test.com',
+            'password' => 'password'
+        ]));
     }
 
     public function testValidatesInput()
