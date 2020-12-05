@@ -31,7 +31,7 @@
 
                             <div class="col-span-3 sm:col-span-2">
                                 <label for="date_of_birth" class="block text-sm font-medium text-gray-700">Date of Birth</label>
-                                <input type="date" name="date_of_birth" value="{{ old('date_of_birth') ?? $contact->date_of_birth }}" class="mt-1 focus:ring-gray-500 focus:border-gray-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                                <input type="date" name="date_of_birth" value="{{ old('date_of_birth') ?? $contact->date_of_birth ? $contact->date_of_birth->format('Y-m-d') : '' }}" class="mt-1 focus:ring-gray-500 focus:border-gray-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
                                 @error('date_of_birth')
                                     <span class="text-red-500 text-xs ml-2">
                                         {{ $message }}
