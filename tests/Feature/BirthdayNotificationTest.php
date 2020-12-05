@@ -16,7 +16,7 @@ class BirthdayNotificationTest extends TestCase
     use RefreshDatabase;
 
     /**
-     * A basic feature test example.
+     * Test that birthday notifications are sent on contact birthdays.
      *
      * @return void
      */

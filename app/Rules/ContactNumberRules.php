@@ -16,7 +16,9 @@ class ContactNumberRules implements Rule
 
 
     /**
-     * Determine if the validation rule passes.
+     * Check if the contact number is either the 
+     * last contact number or a primary contact number.
+     * Returns false if either condition is met.
      *
      * @param  string  $attribute
      * @param  mixed  $value

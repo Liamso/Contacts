@@ -35,7 +35,12 @@ class Contact extends Model
     {
         return $this->hasMany(ContactNumber::class);
     }
-
+    
+    /**
+     * Gets the primary phone number for a contact.
+     *
+     * @return App\Models\ContactNumber
+     */
     public function getPrimaryPhoneAttribute()
     {
         return $this->contactNumbers->where('is_primary', 1)->first();

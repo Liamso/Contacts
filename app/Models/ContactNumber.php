@@ -35,7 +35,17 @@ class ContactNumber extends Model
     {
         return $this->belongsTo(Contact::class);
     }
-
+    
+    /**
+     * Syncs an array of contact numbers given a
+     * contact ID and the array index of 
+     * the primary contact number.
+     *
+     * @param  array $contactNumbers  The array of contact numbers.
+     * @param  string $primaryId  The array index of the primary number.
+     * @param  int $contactId  The ID of the contact to sync numbers to.
+     * @return void
+     */
     public static function syncAll($contactNumbers, $primaryId, $contactId)
     {
         foreach($contactNumbers as $id => $contactNumber) {
