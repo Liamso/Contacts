@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="flex flex-col w-10/12">
+    <div class="flex flex-col w-full">
     <form class="min-w-full mb-3 h-10">
         <label for="search" class="sr-only">Search</label>
         <div class="relative rounded-md shadow-md h-full">
