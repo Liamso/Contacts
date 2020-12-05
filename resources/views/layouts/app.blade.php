@@ -20,8 +20,8 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
 <body>
-    <div id="app" class="min-h-screen bg-gray-50">
-        <nav class="bg-gray-100 border-b-2 border-gray-300">
+    <div id="app" class="min-h-screen bg-gray-100">
+        <nav class="bg-gray-200 border-b-2 border-gray-300">
             <div class="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">
                 <div class="relative flex items-center justify-between h-16">
                 @auth
@@ -75,8 +75,15 @@
             </div>
         </nav>
 
-        <main class="py-4 flex justify-center">
-            @yield('content')
+        <main class="py-4 flex items-center flex-col">
+            @if(session('success')) 
+                <div id="notification" onclick="dismissNotification()" class="bg-green-500 py-2 w-10/12 flex justify-center text-white rounded-md mb-3 transition transition-opacity duration-500 cursor-pointer" >
+                    {{ session('success') }}
+                </div>
+            @endif
+            <div class="flex justify-center w-10/12">
+                @yield('content')
+            </div>
         </main>
     </div>
 </body>
