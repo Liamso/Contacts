@@ -8,6 +8,7 @@
 -   Run `php artisan make:user {email}` to generate yourself a new user
 -   Run `npm install && npm run prod` to generate missing styles
 -   Create a `contacts_testing` database, or change the value of the database in `phpunit.xml`
+-   Run `php artisan test` to run feature & unit tests
 
 ## Attribution
 
