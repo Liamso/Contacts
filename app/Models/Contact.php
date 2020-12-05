@@ -35,6 +35,11 @@ class Contact extends Model
         return $this->hasMany(ContactNumber::class);
     }
 
+    public function getPrimaryPhoneAttribute()
+    {
+        return $this->contactNumbers()->where('is_primary', 1)->first();
+    }
+
     /**
      * Concatenates a contact's first and last names.
      *
