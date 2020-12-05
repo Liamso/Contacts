@@ -47,8 +47,8 @@
                     @auth
                         <div class="hidden sm:block sm:ml-6">
                             <div class="flex space-x-4 ml-12">
-                                <a href="#" class="bg-gray-700 text-white px-3 py-2 rounded-md text-sm font-medium">Dashboard</a>
-                                <a href="/contacts" class="text-gray-700 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Contacts</a>
+                                <a href="/" class="@if (Route::is('home')) bg-gray-700 text-white @else text-gray-700 hover:bg-gray-700 hover:text-white @endif px-3 py-2 rounded-md text-sm font-medium">Dashboard</a>
+                                <a href="/contacts" class="@if (Route::is('contacts.index')) bg-gray-700 text-white @else text-gray-700 hover:bg-gray-700 hover:text-white @endif  px-3 py-2 rounded-md text-sm font-medium">Contacts</a>
                             </div>
                         </div>
                     @endauth
@@ -68,14 +68,14 @@
             <div class="hidden" id="mobileNav">
                 <div class="px-2 pt-2 pb-3 space-y-1">
                     @auth
-                        <a href="#" class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Dashboard</a>
-                        <a href="/contacts" class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Contacts</a>
+                        <a href="/" class="@if (Route::is('home')) bg-gray-700 text-white @else text-gray-700 hover:bg-gray-700 hover:text-white @endif block px-3 py-2 rounded-md text-base font-medium">Dashboard</a>
+                        <a href="/contacts" class="@if (Route::is('contacts.index')) bg-gray-700 text-white @else text-gray-700 hover:bg-gray-700 hover:text-white @endif block px-3 py-2 rounded-md text-base font-medium">Contacts</a>
                     @endauth
                 </div>
             </div>
         </nav>
 
-        <main class="py-4">
+        <main class="py-4 flex justify-center">
             @yield('content')
         </main>
     </div>
