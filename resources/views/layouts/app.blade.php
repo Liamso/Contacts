@@ -20,7 +20,7 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
 <body>
-    <div id="app">
+    <div id="app" class="min-h-screen bg-gray-50">
         <nav class="bg-gray-100 border-b-2 border-gray-300">
             <div class="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">
                 <div class="relative flex items-center justify-between h-16">
@@ -48,18 +48,18 @@
                         <div class="hidden sm:block sm:ml-6">
                             <div class="flex space-x-4 ml-12">
                                 <a href="#" class="bg-gray-700 text-white px-3 py-2 rounded-md text-sm font-medium">Dashboard</a>
-                                <a href="#" class="text-gray-700 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Contacts</a>
+                                <a href="/contacts" class="text-gray-700 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Contacts</a>
                             </div>
                         </div>
                     @endauth
                 </div>
                 <div class="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0 text-gray-700">
                     @auth
-                        <a href="/logout" class="block px-4 py-2 text-sm hover:bg-gray-700 hover:text-white rounded-md" role="menuitem">Sign out</a>
-                    @else    
-                        <form id="logout-form" action="{{ route('logout') }}" method="POST" class="block px-4 py-2 text-sm hover:bg-gray-700 hover:text-white rounded-md" >
+                        <form id="logout-form" action="{{ route('logout') }}" method="POST" >
                             @csrf
+                            <button href="/logout" class="block px-4 py-2 text-sm hover:bg-gray-700 hover:text-white rounded-md" role="menuitem">Sign out</button>
                         </form>
+                    @else
                         <a href="/login" class="block px-4 py-2 text-sm hover:bg-gray-700 hover:text-white rounded-md" role="menuitem">Log In</a>
                     @endauth
                 </div>
@@ -69,13 +69,13 @@
                 <div class="px-2 pt-2 pb-3 space-y-1">
                     @auth
                         <a href="#" class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Dashboard</a>
-                        <a href="#" class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Contacts</a>
+                        <a href="/contacts" class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Contacts</a>
                     @endauth
                 </div>
             </div>
         </nav>
 
-        <main class="py-4 bg-gray-50 min-h-screen">
+        <main class="py-4">
             @yield('content')
         </main>
     </div>
