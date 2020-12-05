@@ -32,7 +32,7 @@ class ContactRequest extends FormRequest
      */
     public function messages() {
         $messages = [
-            'numbers.required' => 'You must supply at least one phone number.'
+            'numbers.required' => 'You must supply at least one phone number.',
         ];
     
         if (is_array($this->numbers)) {

@@ -33,7 +33,7 @@ class CreateUserTest extends TestCase
 
         $this->assertTrue(Auth::attempt([
             'email' => 'test@test.com',
-            'password' => 'password'
+            'password' => 'password',
         ]));
     }
     
