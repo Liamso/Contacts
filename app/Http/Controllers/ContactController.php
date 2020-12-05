@@ -32,18 +32,29 @@ class ContactController extends Controller
      */
     public function create()
     {
-        //
+        return view('app.contacts.edit');
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\ContactRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(ContactRequest $request)
     {
-        //
+        $contact = Contact::create(
+            $request->only([
+                'first_name',
+                'last_name',
+                'date_of_birth',
+                'position',
+                'company',
+                'email'
+            ])
+        );
+
+        return redirect(route('contacts.edit', $contact))->withSuccess('Contact created.');
     }
 
     /**
@@ -62,7 +73,7 @@ class ContactController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Contact  $contact
+     * @param  \App\Models\ContactRequest  $contact
      * @return \Illuminate\Http\Response
      */
     public function edit(Contact $contact)
@@ -92,7 +103,7 @@ class ContactController extends Controller
             ])
         );
 
-        return redirect()->back()->withSuccess('Contact updated successfully.');
+        return redirect()->back()->withSuccess('Contact updated.');
     }
 
     /**
@@ -103,6 +114,7 @@ class ContactController extends Controller
      */
     public function destroy(Contact $contact)
     {
-        //
+        $contact->delete();
+        return redirect(route('contacts.index'))->withSuccess('Contact deleted.');
     }
 }
