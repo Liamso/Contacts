@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use App\Models\Contact;
+use App\Models\ContactNumber;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class ContactFactory extends Factory
@@ -54,6 +55,15 @@ class ContactFactory extends Factory
             return [
                 'email' => $this->faker->email
             ];
+        });
+    }
+
+    public function configure()
+    {
+        return $this->afterCreating(function (Contact $contact) {
+            ContactNumber::factory()->create([
+                'contact_id' => $contact->id
+            ]);
         });
     }
 }
