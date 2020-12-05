@@ -35,7 +35,7 @@ class CreateUser extends Command
     /**
      * Creates a user given email and password inputs.
      *
-     * @return void
+     * @return int
      */
     public function handle()
     {
@@ -57,10 +57,12 @@ class CreateUser extends Command
         if ($validator->fails()) {
             // Display errors to the user
             $this->error('The following errors were encountered:');
-            collect($validator->errors()->toArray())
-                ->each(fn ($error) => $this->error(implode(' ', $error)));
+            array_map(
+                fn ($error) => $this->error(implode(' ', $error)), 
+                $validator->errors()->toArray()
+            );
 
-            return;
+            return 1;
         }
 
         User::create([
@@ -70,5 +72,6 @@ class CreateUser extends Command
         ]);
 
         $this->info("User created! Use the email '{$email}' to login with the password you chose.");
+        return 0;
     }
 }
