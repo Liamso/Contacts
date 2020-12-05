@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Contact;
 use Illuminate\Http\Request;
+use App\Http\Requests\ContactRequest;
 
 class ContactController extends Controller
 {
@@ -19,7 +20,7 @@ class ContactController extends Controller
             ->paginate(20)
             ->appends(request()->query());
 
-        return view('app.contacts', [
+        return view('app.contacts.index', [
             'contacts' => $contacts,
         ]);
     }
@@ -53,7 +54,9 @@ class ContactController extends Controller
      */
     public function show(Contact $contact)
     {
-        //
+        return view('app.contacts.show', [
+            'contact' => $contact
+        ]);
     }
 
     /**
@@ -64,7 +67,9 @@ class ContactController extends Controller
      */
     public function edit(Contact $contact)
     {
-        //
+        return view('app.contacts.edit', [
+            'contact' => $contact
+        ]);
     }
 
     /**
@@ -74,9 +79,20 @@ class ContactController extends Controller
      * @param  \App\Models\Contact  $contact
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Contact $contact)
+    public function update(ContactRequest $request, Contact $contact)
     {
-        //
+        $contact->update(
+            $request->only([
+                'first_name',
+                'last_name',
+                'date_of_birth',
+                'position',
+                'company',
+                'email'
+            ])
+        );
+
+        return redirect()->back()->withSuccess('Contact updated successfully.');
     }
 
     /**

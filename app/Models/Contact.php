@@ -18,6 +18,14 @@ class Contact extends Model
         'date_of_birth' => 'datetime:Y-m-d',
     ];
 
+    /**
+     * The attributes that can not be filled
+     * for mass assignment.
+     * 
+     * @var array
+     */
+    protected $guarded = [];
+
     public function getFullNameAttribute()
     {
         return "{$this->first_name} {$this->last_name}";
