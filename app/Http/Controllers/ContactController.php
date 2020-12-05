@@ -14,7 +14,14 @@ class ContactController extends Controller
      */
     public function index()
     {
-        //
+        $contacts = Contact::query()
+            ->search(request('search'))
+            ->paginate(20)
+            ->appends(request()->query());
+
+        return view('app.contacts', [
+            'contacts' => $contacts,
+        ]);
     }
 
     /**
