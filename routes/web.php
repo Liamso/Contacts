@@ -18,5 +18,7 @@ use App\Http\Controllers\ContactNumberController;
 
 Auth::routes();
 Route::get('/', [HomeController::class, 'index'])->name('home');
-Route::resource('contacts', ContactController::class);
-Route::delete('/contact-numbers', [ContactNumberController::class, 'destroy']);
+Route::middleware('auth')->group(function () {
+    Route::resource('contacts', ContactController::class);
+    Route::delete('/contact-numbers', [ContactNumberController::class, 'destroy']);
+});
