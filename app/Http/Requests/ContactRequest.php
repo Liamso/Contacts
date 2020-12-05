@@ -16,7 +16,7 @@ class ContactRequest extends FormRequest
         return [
             'first_name' => 'required|max:1000',
             'last_name' => 'required|max:1000',
-            'date_of_birth' => 'nullable|date_format:Y-m-d',
+            'date_of_birth' => 'nullable|date_format:Y-m-d|before:now',
             'company' => 'required|max:1000',
             'position' => 'required|max:1000',
             'email' => 'nullable|email|max:1000',
