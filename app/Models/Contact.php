@@ -37,7 +37,7 @@ class Contact extends Model
 
     public function getPrimaryPhoneAttribute()
     {
-        return $this->contactNumbers()->where('is_primary', 1)->first();
+        return $this->contactNumbers->where('is_primary', 1)->first();
     }
 
     /**

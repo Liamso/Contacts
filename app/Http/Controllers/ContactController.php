@@ -18,6 +18,7 @@ class ContactController extends Controller
     {
         $contacts = Contact::query()
             ->search(request('search'))
+            ->with('contactNumbers')
             ->paginate(20)
             ->appends(request()->query());
 
