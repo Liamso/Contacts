@@ -120,6 +120,7 @@ class ContactController extends Controller
      */
     public function destroy(Contact $contact)
     {
+        $contact->contactNumbers()->delete();
         $contact->delete();
         return redirect(route('contacts.index'))->withSuccess('Contact deleted.');
     }
