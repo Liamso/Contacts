@@ -11,3 +11,18 @@ dismissNotification = function () {
         el.remove(); 
     }, 500);
 }
+
+cleanEmptyNumbers = function (e) {
+    var number = document.getElementById('newNumber');
+    var is_primary = document.getElementById('newPrimary');
+
+    if (number.value === '' && is_primary.getAttribute('checked') === null) {
+        number.disabled = true;
+        is_primary.disabled = true;
+    }
+}
+
+destroyContactNumber = function (id) {
+    document.getElementById('destroyContactNumberInput').value = id;
+    document.getElementById('destroyContactNumberForm').submit();
+}

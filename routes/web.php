@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ContactController;
+use App\Http\Controllers\ContactNumberController;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,3 +19,4 @@ use App\Http\Controllers\ContactController;
 Auth::routes();
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::resource('contacts', ContactController::class);
+Route::delete('/contact-numbers', [ContactNumberController::class, 'destroy']);

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Contact;
 use Illuminate\Http\Request;
+use App\Models\ContactNumber;
 use App\Http\Requests\ContactRequest;
 
 class ContactController extends Controller
@@ -54,6 +55,8 @@ class ContactController extends Controller
             ])
         );
 
+        ContactNumber::syncAll($request->numbers, $request->primary_number, $contact->id);
+
         return redirect(route('contacts.edit', $contact))->withSuccess('Contact created.');
     }
 
@@ -86,7 +89,7 @@ class ContactController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Models\ContactRequest  $contact
      * @param  \App\Models\Contact  $contact
      * @return \Illuminate\Http\Response
      */
@@ -102,6 +105,8 @@ class ContactController extends Controller
                 'email'
             ])
         );
+
+        ContactNumber::syncAll($request->numbers, $request->primary_number, $contact->id);
 
         return redirect()->back()->withSuccess('Contact updated.');
     }
