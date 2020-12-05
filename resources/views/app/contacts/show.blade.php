@@ -46,6 +46,30 @@
                             {{ $contact->date_of_birth ? $contact->date_of_birth->format('d/m/Y') : '' }}
                         </dd>
                     </div>
+
+                    <div class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                        <dt class="text-sm font-medium text-gray-500">
+                        Attachments
+                        </dt>
+                        <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                        <ul class="border border-gray-200 rounded-md divide-y divide-gray-200">
+                            @foreach($contact->contactNumbers as $number)
+                                <li class="pl-3 pr-4 py-3 flex items-center justify-between text-sm">
+                                    <div class="w-0 flex-1 flex items-center">
+                                        <span class="ml-2 flex-1 w-0 truncate">
+                                            {{ $number->number }}
+                                        </span>
+                                    </div>
+                                    @if ($number->is_primary)
+                                        <div class="ml-4 flex-shrink-0 font-medium text-gray-600">
+                                            Primary
+                                        </div>
+                                    @endif
+                                </li>
+                            @endforeach
+                        </ul>
+                        </dd>
+                    </div>
                 </dl>
             </div>
         </div>
